@@ -28,8 +28,12 @@ class Equation(PyQt6.QtWidgets.QWidget):
         # connect the x button to delete the equation
         self.x_button.clicked.connect(self.deleteLater)
 
-        # create the layout (left = equation, right = x button)
+        # create checkbox
+        self.checkbox = PyQt6.QtWidgets.QCheckBox("Show equation")
+
+        # create the layout
         self.layout = PyQt6.QtWidgets.QHBoxLayout()
+        self.layout.addWidget(self.checkbox)
         self.layout.addWidget(self.widget_left)
         self.layout.addWidget(self.x_button)
 
