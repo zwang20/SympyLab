@@ -26,7 +26,7 @@ class Equation(PyQt6.QtWidgets.QWidget):
         self.x_button = PyQt6.QtWidgets.QPushButton("x")
 
         # connect the x button to delete the equation
-        # self.x_button.clicked.connect(self.delete_equation)
+        self.x_button.clicked.connect(self.deleteLater)
 
         # create the layout (left = equation, right = x button)
         self.layout = PyQt6.QtWidgets.QHBoxLayout()
