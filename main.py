@@ -29,7 +29,9 @@ class Equation(PyQt6.QtWidgets.QWidget):
         self.x_button.clicked.connect(self.deleteLater)
 
         # create checkbox
-        self.checkbox = PyQt6.QtWidgets.QCheckBox("Show equation")
+        self.checkbox = PyQt6.QtWidgets.QCheckBox()
+        # set checkbox to checked
+        self.checkbox.setChecked(True)
 
         # create the layout
         self.layout = PyQt6.QtWidgets.QHBoxLayout()
@@ -90,6 +92,8 @@ class MainWindow(PyQt6.QtWidgets.QMainWindow):
         layout = PyQt6.QtWidgets.QHBoxLayout()
 
         layout.addWidget(EquationTab())
+
+        # add graph
         layout.addWidget(PyQt6.QtWidgets.QLabel('Placeholder Graph'))
 
         # set central widget
@@ -97,20 +101,14 @@ class MainWindow(PyQt6.QtWidgets.QMainWindow):
         self.setCentralWidget(central_widget)
 
         # create menu bar
-        menu_bar = self.menuBar()
+        self.menu_bar = self.menuBar()
 
         # create menu
-        file_menu = menu_bar.addMenu("File")
-        edit_menu = menu_bar.addMenu("Edit")
+        file_menu = self.menu_bar.addMenu("File")
+        edit_menu = self.menu_bar.addMenu("Edit")
 
         # add menu bar to window
-        self.setMenuBar(menu_bar)
-
-        # create colum
-        column = PyQt6.QtWidgets.QWidget()
-        column.setLayout(PyQt6.QtWidgets.QVBoxLayout())
-
-        #
+        self.setMenuBar(self.menu_bar)
 
 
 def main():
