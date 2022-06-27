@@ -68,8 +68,8 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
         # create equation
         equation = Equation()
 
-        # add equation to above add equation button
-        self.layout.insertWidget(1, equation)
+        # add equation to the second to last position of the layout
+        self.layout.insertWidget(self.layout.count() - 1, equation)
 
 
 class MainWindow(PyQt6.QtWidgets.QMainWindow):
