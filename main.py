@@ -1,24 +1,28 @@
-import PyQt6.QtWidgets
 import sys
+
+import PyQt6.QtWidgets
+import sympy
 
 
 class Equation(PyQt6.QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+        self.equation = None
+        self.text = ""
 
         # create the equation label
-        self.equation = PyQt6.QtWidgets.QLabel("TODO: Replace with nice latex equation")
+        self.equation_text = PyQt6.QtWidgets.QLabel("TODO: Replace with nice latex equation")
 
         # create text box for the equation
-        self.equation_text = PyQt6.QtWidgets.QLineEdit()
+        self.equation_text_box = PyQt6.QtWidgets.QLineEdit()
 
         # connect the text box to the equation label
-        self.equation_text.textChanged.connect(self.update_equation)
+        self.equation_text_box.textChanged.connect(self.update_equation)
 
         # left side
         self.layout_left = PyQt6.QtWidgets.QVBoxLayout()
-        self.layout_left.addWidget(self.equation)
         self.layout_left.addWidget(self.equation_text)
+        self.layout_left.addWidget(self.equation_text_box)
         self.widget_left = PyQt6.QtWidgets.QWidget()
         self.widget_left.setLayout(self.layout_left)
 
@@ -42,7 +46,14 @@ class Equation(PyQt6.QtWidgets.QWidget):
         self.setLayout(self.layout)
 
     def update_equation(self):
-        self.equation.setText(self.equation_text.text())
+        self.text = self.equation_text_box.text()
+        try:
+            self.equation = sympy.parsing.sympy_parser.parse_expr(self.text)
+            self.equation_text.setText(str(self.equation))
+        except SyntaxError:
+            self.equation_text.setText("Syntax Error")
+        except Exception as e:
+            print(e)
 
 
 class EquationTab(PyQt6.QtWidgets.QWidget):
