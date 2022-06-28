@@ -1,5 +1,6 @@
 import sys
-
+import tokenize
+import traceback
 import PyQt6.QtWidgets
 import sympy
 
@@ -52,8 +53,8 @@ class Equation(PyQt6.QtWidgets.QWidget):
             self.equation_text.setText(str(self.equation))
         except SyntaxError:
             self.equation_text.setText("Syntax Error")
-        except Exception as e:
-            print(e)
+        except tokenize.TokenError:
+            self.equation_text.setText("Token Error")
 
 
 class EquationTab(PyQt6.QtWidgets.QWidget):
@@ -130,4 +131,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (Exception,):
+        print(traceback.format_exc())
