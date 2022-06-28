@@ -1,6 +1,7 @@
 import sys
 import tokenize
 import traceback
+
 import PyQt6.QtWidgets
 import sympy
 
