@@ -53,8 +53,14 @@ class Equation(PyQt6.QtWidgets.QWidget):
             self.equation_text.setText(str(self.equation))
         except SyntaxError:
             self.equation_text.setText("Syntax Error")
+        except TypeError:
+            self.equation_text.setText("Type Error")
+        except ValueError:
+            self.equation_text.setText("Value Error")
         except tokenize.TokenError:
             self.equation_text.setText("Token Error")
+        except (Exception,):
+            print(traceback.format_exc())
 
 
 class EquationTab(PyQt6.QtWidgets.QWidget):
