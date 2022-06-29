@@ -10,3 +10,11 @@ It is or will be able to:
 - Simplify expressions
 - Solve equations
 - Render LaTeX expressions
+
+## Setup
+
+Run the following line to install dependencies using `pip`:
+
+```shell
+pip install -r requirements.txt
+```
