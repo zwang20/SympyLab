@@ -8,7 +8,8 @@ import sympy
 class Equation(PyQt6.QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-        self.equation = None
+        self.equation_left = None
+        self.equation_right = None
         self.text = ""
 
         # create the equation label
@@ -49,8 +50,16 @@ class Equation(PyQt6.QtWidgets.QWidget):
     def update_equation(self):
         self.text = self.equation_text_box.text()
         try:
-            self.equation = sympy.parsing.sympy_parser.parse_expr(self.text)
-            self.equation_text.setText(str(self.equation))
+            if self.text.count("=") == 0:
+                self.equation_left = sympy.parsing.sympy_parser.parse_expr("y")
+                self.equation_right = sympy.parsing.sympy_parser.parse_expr(self.text)
+                self.equation_text.setText("y=" + str(self.equation_right))
+            elif self.text.count("=") == 1:
+                self.equation_left = sympy.parsing.sympy_parser.parse_expr(self.text.split("=")[0])
+                self.equation_right = sympy.parsing.sympy_parser.parse_expr(self.text.split("=")[1])
+                self.equation_text.setText(str(self.equation_left) + "=" + str(self.equation_right))
+            else:
+                self.text = "Syntax Error"
         except SyntaxError:
             self.equation_text.setText("Syntax Error")
         except TypeError:
