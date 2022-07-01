@@ -2,6 +2,8 @@
 
 [![CodeQL](https://github.com/zwang20/SympyLab/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/zwang20/SympyLab/actions/workflows/codeql-analysis.yml)
 
+![img](./img.png)
+
 A GUI mathematical solver making use of [the SymPy library](https://www.sympy.org/).
 
 It is or will be able to:
