@@ -4,16 +4,24 @@
 
 ![img](./img.png)
 
-A GUI mathematical solver making use of [the SymPy library](https://www.sympy.org/).
+A platform agnostic GUI mathematical solver making use of the [SymPy library](https://www.sympy.org/).
 
-It is or will be able to:
+Features
 
 - Graph relations between x and y on a coordinate plane
 - Simplify expressions
+
+In the future it will be able to:
+
 - Solve equations
 - Render LaTeX expressions
 
 ## Setup
+
+Requirements
+
+- Python
+- Pip
 
 Run the following line to install dependencies using `pip`:
 
