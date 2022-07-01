@@ -1,6 +1,3 @@
-import tokenize
-import traceback
-
 import PyQt6.QtWidgets
 import sympy
 
@@ -58,15 +55,15 @@ class Equation(PyQt6.QtWidgets.QWidget):
                 self.equation_left = sympy.parsing.sympy_parser.parse_expr(self.text.split("=")[0])
                 self.equation_right = sympy.parsing.sympy_parser.parse_expr(self.text.split("=")[1])
                 self.equation_text.setText(str(self.equation_left) + "=" + str(self.equation_right))
+                # TODO
+                self.equation_text.setText("TODO: Not implemented")
+                self.equation_left = None
+                self.equation_right = None
             else:
                 self.text = "Syntax Error"
-        except SyntaxError:
-            self.equation_text.setText("Syntax Error")
-        except TypeError:
-            self.equation_text.setText("Type Error")
-        except ValueError:
-            self.equation_text.setText("Value Error")
-        except tokenize.TokenError:
-            self.equation_text.setText("Token Error")
-        except (Exception,):
-            print(traceback.format_exc())
+                self.equation_left = None
+                self.equation_right = None
+        except (Exception,) as error:
+            self.equation_text.setText(f"{error}")
+            self.equation_left = None
+            self.equation_right = None
