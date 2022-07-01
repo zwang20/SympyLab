@@ -10,9 +10,12 @@ class MainWindow(PyQt6.QtWidgets.QMainWindow):
 
         # dry import to deal with first time lag
         from sympy.external.importtools import import_module
-        import_module('matplotlib',
+        import_module(
+            'matplotlib',
             import_kwargs={'fromlist': ['pyplot', 'cm', 'collections']},
-            min_module_version='1.1.0', catch=(RuntimeError,))
+            min_module_version='1.1.0',
+            catch=(RuntimeError,)
+        )
 
         # set window title
         self.setWindowTitle("SympyLab")
@@ -54,10 +57,6 @@ class MainWindow(PyQt6.QtWidgets.QMainWindow):
         label = PyQt6.QtWidgets.QLabel()
         graph = PyQt6.QtGui.QPixmap('graph.png')
         label.setPixmap(graph)
-        # widget = PyQt6.QtWidgets.QWidget()
-        # layout = PyQt6.QtWidgets.QVBoxLayout()
-        # layout.addWidget(label)
-        # widget.setLayout(layout)
 
         # add graph to layout
         self.centralWidget().layout().addWidget(label)
