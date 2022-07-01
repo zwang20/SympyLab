@@ -1,5 +1,7 @@
 import PyQt6.QtWidgets
 import sympy
+from sympy.parsing.sympy_parser import standard_transformations,\
+    implicit_multiplication_application
 
 
 class Equation(PyQt6.QtWidgets.QWidget):
@@ -53,10 +55,15 @@ class Equation(PyQt6.QtWidgets.QWidget):
             return
         try:
             lhs, eq, rhs = map(str.strip, self.text.rpartition("="))
-            if not lhs:
+            if not eq:
                 lhs = "y"
-            self.equation_left = sympy.parsing.sympy_parser.parse_expr(lhs)
-            self.equation_right = sympy.parsing.sympy_parser.parse_expr(rhs)
+            self.equation_left = sympy.parsing.sympy_parser.parse_expr(
+                    lhs,
+                    transformations=(*standard_transformations,
+                                     implicit_multiplication_application))
+            self.equation_right = sympy.parsing.sympy_parser.parse_expr(rhs,
+                    transformations=(*standard_transformations,
+                                     implicit_multiplication_application))
             self.equation_text.setText(f"{self.equation_left} = {self.equation_right}")
         except (Exception,) as error:
             self.equation_left = None

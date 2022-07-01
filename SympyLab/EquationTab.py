@@ -5,8 +5,12 @@ import sympy
 
 from .Equation import Equation
 
+import matplotlib.colors as mcolors
+
 
 class EquationTab(PyQt6.QtWidgets.QWidget):
+    colors = tuple(mcolors.TABLEAU_COLORS.keys())
+
     def __init__(self):
         super().__init__()
 
@@ -47,27 +51,29 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
 
         # loop over all Equation
         plot = None
-        for equation in self.children():
+        for color, equation in zip(self.colors, self.children()):
 
             if type(equation) != Equation:
                 continue
             equation: Equation = equation
             if equation.equation_right is None:
                 continue
-            try:
-                print(equation.equation_right)
+            lhs, rhs = equation.equation_left, equation.equation_right
+            for f in sympy.solve(lhs - rhs, sympy.var("y")):
                 if plot is None:
-                    plot = sympy.plotting.plot(equation.equation_right, show=False)
+                    plot = sympy.plotting.plot(
+                            f,
+                            show=False,
+                            line_color=color,
+                            ylabel="y")
                 else:
-                    plot.extend(sympy.plotting.plot(equation.equation_right, show=False))
-            except (Exception,):
-                print(traceback.format_exc())
-        self.plot = plot
-        try:
-            self.plot.save("graph.png")
-        except (Exception,):
-            print(traceback.format_exc())
-        try:
+                    plot.extend(sympy.plotting.plot(
+                            f,
+                            show=False,
+                            line_color=color,
+                            ylabel="y")
+                    )
+        if plot is not None:
+            plot.save("graph.png")
+            self.plot = plot
             self.parent().parent().refresh()
-        except (Exception,):
-            print(traceback.format_exc())
