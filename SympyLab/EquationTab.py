@@ -75,6 +75,8 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
                             ylabel="y")
                     )
         if plot is not None:
+            if not os.path.exists("cache"):
+                os.mkdir("cache")
             plot.save(os.path.join("cache", "graph.png"))
             self.plot = plot
             self.parent().parent().refresh()
