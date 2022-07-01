@@ -1,3 +1,4 @@
+import os
 import traceback
 
 import PyQt6.QtWidgets
@@ -74,6 +75,6 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
                             ylabel="y")
                     )
         if plot is not None:
-            plot.save("graph.png")
+            plot.save(os.path.join("cache", "graph.png"))
             self.plot = plot
             self.parent().parent().refresh()

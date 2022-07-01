@@ -1,5 +1,6 @@
 import PyQt6.QtWidgets
 import PyQt6.QtGui
+import os
 
 from .EquationTab import EquationTab
 
@@ -55,7 +56,7 @@ class MainWindow(PyQt6.QtWidgets.QMainWindow):
             widget.deleteLater()
 
         label = PyQt6.QtWidgets.QLabel()
-        graph = PyQt6.QtGui.QPixmap('graph.png')
+        graph = PyQt6.QtGui.QPixmap(os.path.join("cache", "graph.png"))
         label.setPixmap(graph)
 
         # add graph to layout
