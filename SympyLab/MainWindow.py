@@ -8,6 +8,12 @@ class MainWindow(PyQt6.QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
+        # dry import to deal with first time lag
+        from sympy.external.importtools import import_module
+        import_module('matplotlib',
+            import_kwargs={'fromlist': ['pyplot', 'cm', 'collections']},
+            min_module_version='1.1.0', catch=(RuntimeError,))
+
         # set window title
         self.setWindowTitle("SympyLab")
 
