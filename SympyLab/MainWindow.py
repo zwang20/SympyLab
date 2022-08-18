@@ -1,6 +1,7 @@
-import PyQt6.QtWidgets
-import PyQt6.QtGui
 import os
+
+import PyQt6.QtGui
+import PyQt6.QtWidgets
 
 from .EquationTab import EquationTab
 
