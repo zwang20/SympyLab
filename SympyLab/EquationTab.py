@@ -1,12 +1,10 @@
 import os
-import traceback
 
 import PyQt6.QtWidgets
+import matplotlib.colors as mcolors
 import sympy
 
 from .Equation import Equation
-
-import matplotlib.colors as mcolors
 
 
 class EquationTab(PyQt6.QtWidgets.QWidget):
@@ -63,16 +61,16 @@ class EquationTab(PyQt6.QtWidgets.QWidget):
             for f in sympy.solve(lhs - rhs, sympy.var("y")):
                 if plot is None:
                     plot = sympy.plotting.plot(
-                            f,
-                            show=False,
-                            line_color=color,
-                            ylabel="y")
+                        f,
+                        show=False,
+                        line_color=color,
+                        ylabel="y")
                 else:
                     plot.extend(sympy.plotting.plot(
-                            f,
-                            show=False,
-                            line_color=color,
-                            ylabel="y")
+                        f,
+                        show=False,
+                        line_color=color,
+                        ylabel="y")
                     )
         if plot is not None:
             if not os.path.exists("cache"):
